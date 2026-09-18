@@ -256,6 +256,44 @@
     #pixelGrid{ grid-template-columns: repeat(8, 22px); grid-template-rows: repeat(8, 22px); }
     .px{ width:22px; height:22px; }
   }
+
+  /* ===== vx (visual example) styles, scoped and merged in ===== */
+  .vx{font-family:"Manrope","Segoe UI",Arial,sans-serif;max-width:780px;margin:44px auto 0;background:var(--panel);
+    color:var(--text);border:1px solid var(--line);border-radius:var(--radius);padding:20px;direction:ltr;text-align:left}
+  .vx-q{margin:0 0 6px;color:var(--amber);font-size:18px}
+  .vx-qt{margin:0 0 18px;font-size:14px;line-height:1.8;color:var(--muted)}
+  .vx code{background:var(--panel-2);padding:1px 6px;border-radius:5px;color:var(--amber);font-family:"JetBrains Mono",monospace}
+  .vx-stage{display:flex;align-items:stretch;justify-content:center;gap:8px;flex-wrap:wrap}
+  .vx-box{flex:1;min-width:210px;background:var(--panel-2);border:1px solid var(--line);border-radius:12px;
+    padding:12px;text-align:center}
+  .vx-h{font-size:12.5px;color:var(--text);margin-bottom:10px;font-family:"JetBrains Mono",monospace}
+  .vx-h b{background:var(--b);color:#fff;border-radius:50%;padding:1px 7px;margin-right:6px;font-size:11px}
+  .vx-ar{display:flex;align-items:center;color:var(--muted);font-size:20px}
+  .vx-imgwrap{position:relative;display:inline-block;padding:16px 0 0 0}
+  .vx-imgwrap canvas{border:2px solid var(--b);border-radius:4px;display:block}
+  .vx-w{position:absolute;top:0;left:50%;transform:translateX(-50%);font-size:10px;color:var(--b)}
+  .vx-hgt{position:absolute;top:55%;right:-42px;font-size:10px;color:var(--b)}
+  .vx-ch{display:flex;justify-content:center;margin-bottom:8px}
+  .vx-c{width:46px;height:46px;border-radius:6px;display:flex;align-items:center;justify-content:center;
+    font-weight:700;color:#0f172a;margin-left:-12px;border:2px solid var(--panel-2)}
+  .vx-b{background:#60a5fa;margin-left:0}.vx-g{background:#4ade80}.vx-r{background:#f87171}
+  .vx-shape{font-family:"JetBrains Mono",monospace;font-size:17px;color:var(--amber)}
+  .vx-shape b{color:var(--text)}
+  .vx-sl{font-size:10px;color:var(--muted);margin-bottom:8px}
+  .vx-px{margin:0 auto 8px;border-collapse:collapse;font-family:"JetBrains Mono",monospace;font-size:11px}
+  .vx-px td{border:1px solid var(--line);width:30px;height:24px;color:var(--text)}
+  .vx-file{display:inline-block;background:var(--bg);border:1px dashed var(--g);border-radius:8px;padding:8px}
+  .vx-file canvas{border-radius:3px;display:block}
+  .vx-fname{font-family:"JetBrains Mono",monospace;font-size:11px;color:var(--g);margin-top:5px}
+  .vx-note{font-size:11.5px;color:var(--text);margin-top:8px;font-family:"JetBrains Mono",monospace}
+  .vx-ok{color:var(--g)}
+  .vx-cap{font-size:10.5px;color:var(--muted);margin-top:6px;font-style:italic}
+  .vx-term{margin-top:18px;background:var(--bg);border:1px solid var(--line);border-radius:10px;overflow:hidden}
+  .vx-termbar{background:var(--panel-2);padding:6px 10px;font-size:11px;color:var(--muted)}
+  .vx-termbar span{display:inline-block;width:9px;height:9px;border-radius:50%;background:var(--line);margin-right:4px}
+  .vx-outtxt{margin:0;padding:12px;font-family:"JetBrains Mono",monospace;font-size:12.5px;line-height:1.8;color:var(--g)}
+  .vx-code{margin:14px 0 0;background:var(--bg);border:1px solid var(--line);border-radius:10px;padding:14px;
+    font-family:"JetBrains Mono",monospace;font-size:12.5px;line-height:1.7;color:var(--text);overflow:auto}
 </style>
 </head>
 <body>
@@ -371,6 +409,89 @@
     </div>
   </section>
 
+  <section class="topic">
+    <div class="topic-head">
+      <span class="chip">04</span>
+      <h2>Worked Example — Read, Inspect &amp; Save</h2>
+    </div>
+
+    <div class="vx">
+      <h3 class="vx-q">Question</h3>
+      <p class="vx-qt">
+        Read an image named <code>image.jpg</code> using OpenCV and print whether it was loaded
+        successfully. Then print the image <code>shape</code> and data type <code>dtype</code>,
+        and finally save it as <code>output.jpg</code>.
+      </p>
+
+      <div class="vx-stage">
+
+        <div class="vx-box">
+          <div class="vx-h"><b>1</b> cv2.imread("image.jpg")</div>
+          <div class="vx-imgwrap">
+            <span class="vx-w">640 px</span>
+            <canvas id="vxImg" width="200" height="150"></canvas>
+            <span class="vx-hgt">480 px</span>
+          </div>
+          <div class="vx-note vx-ok">✔ Image loaded successfully</div>
+          <div class="vx-cap">File on disk → NumPy array</div>
+        </div>
+
+        <div class="vx-ar">→</div>
+
+        <div class="vx-box">
+          <div class="vx-h"><b>2</b> img.shape &amp; img.dtype</div>
+          <div class="vx-ch">
+            <div class="vx-c vx-b">B</div>
+            <div class="vx-c vx-g">G</div>
+            <div class="vx-c vx-r">R</div>
+          </div>
+          <div class="vx-shape">(<b>480</b>, <b>640</b>, <b>3</b>)</div>
+          <div class="vx-sl">height &nbsp; width &nbsp; channels</div>
+          <table class="vx-px">
+            <tr><td>34</td><td>210</td><td>7</td></tr>
+            <tr><td>128</td><td>255</td><td>90</td></tr>
+            <tr><td>0</td><td>76</td><td>183</td></tr>
+          </table>
+          <div class="vx-note">dtype = <b>uint8</b> → values 0 … 255</div>
+          <div class="vx-cap">Each pixel is one byte per channel</div>
+        </div>
+
+        <div class="vx-ar">→</div>
+
+        <div class="vx-box">
+          <div class="vx-h"><b>3</b> cv2.imwrite("output.jpg", img)</div>
+          <div class="vx-file">
+            <canvas id="vxOut" width="120" height="90"></canvas>
+            <div class="vx-fname">output.jpg</div>
+          </div>
+          <div class="vx-note vx-ok">✔ Image saved</div>
+          <div class="vx-cap">Array → new file on disk</div>
+        </div>
+      </div>
+
+      <div class="vx-term">
+        <div class="vx-termbar"><span></span><span></span><span></span> Expected output</div>
+        <pre class="vx-outtxt"><code>Image loaded successfully
+Shape: (480, 640, 3)
+Data type: uint8
+Image saved</code></pre>
+      </div>
+
+      <pre class="vx-code"><code>import cv2
+
+img = cv2.imread("image.jpg")
+
+if img is not None:
+    print("Image loaded successfully")
+    print("Shape:", img.shape)      # (480, 640, 3)
+    print("Data type:", img.dtype)  # uint8
+    cv2.imwrite("output.jpg", img)
+    print("Image saved")
+else:
+    print("Image not found")</code></pre>
+    </div>
+  </section>
+
 </main>
 
 <footer>
@@ -457,6 +578,23 @@
     document.getElementById('binStatus').textContent = `${correct} / 3 correct`;
   }
 
+  (function(){
+    function draw(id){
+      const c = document.getElementById(id); if(!c) return;
+      const x = c.getContext('2d'), W = c.width, H = c.height;
+      const g = x.createLinearGradient(0,0,W,H);
+      g.addColorStop(0,'#0ea5e9'); g.addColorStop(1,'#1e1b4b');
+      x.fillStyle = g; x.fillRect(0,0,W,H);
+      x.fillStyle = '#fbbf24'; x.beginPath();
+      x.arc(W*0.72, H*0.28, W*0.11, 0, Math.PI*2); x.fill();
+      x.fillStyle = '#334155'; x.beginPath();
+      x.moveTo(0,H); x.lineTo(W*0.34,H*0.38); x.lineTo(W*0.62,H); x.closePath(); x.fill();
+      x.fillStyle = '#475569'; x.beginPath();
+      x.moveTo(W*0.42,H); x.lineTo(W*0.75,H*0.52); x.lineTo(W,H); x.closePath(); x.fill();
+      x.fillStyle = '#22c55e'; x.fillRect(0, H*0.88, W, H*0.12);
+    }
+    draw('vxImg'); draw('vxOut');
+  })();
 </script>
 
 </body>
