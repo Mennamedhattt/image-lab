@@ -1,382 +1,463 @@
-
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" dir="ltr">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>Happy Birthday Abdelrhman ❤️</title>
-
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&family=Great+Vibes&display=swap" rel="stylesheet">
-
+<title>CSC360 - Lab 01 Exercises</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
 <style>
+  :root{
+    --bg: #101215;
+    --panel: #16191d;
+    --panel-2: #1c2025;
+    --line: #2a2f36;
+    --text: #e9ebee;
+    --muted: #9aa2ad;
+    --r: #e0574a;
+    --g: #4ca86a;
+    --b: #4a7fe0;
+    --amber: #d9a441;
+    --radius: 10px;
+  }
+  :root:not([data-theme="light"]){
+    color-scheme: dark;
+  }
+  @media (prefers-color-scheme: light){
+    :root:not([data-theme="dark"]){
+      --bg: #f3f2ee;
+      --panel: #ffffff;
+      --panel-2: #f7f6f2;
+      --line: #ddd9d0;
+      --text: #1b1c1e;
+      --muted: #6b6f76;
+    }
+  }
+  :root[data-theme="light"]{
+    --bg: #f3f2ee;
+    --panel: #ffffff;
+    --panel-2: #f7f6f2;
+    --line: #ddd9d0;
+    --text: #1b1c1e;
+    --muted: #6b6f76;
+  }
 
-*{
-margin:0;
-padding:0;
-box-sizing:border-box;
-}
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;}
+  body{
+    background: var(--bg);
+    color: var(--text);
+    font-family: "Manrope", "Segoe UI", Arial, sans-serif;
+    line-height: 1.7;
+    padding: 0 0 80px;
+  }
+  .mono{ font-family:"JetBrains Mono", ui-monospace, monospace; }
 
-body{
+  header{
+    padding: 48px 24px 32px;
+    max-width: 780px;
+    margin: 0 auto;
+    text-align: left;
+  }
+  .eyebrow{
+    color: var(--muted);
+    font-size: 14px;
+    margin: 0 0 6px;
+  }
+  h1{
+    font-size: 30px;
+    font-weight: 800;
+    margin: 0 0 10px;
+  }
+  .sub{ color: var(--muted); font-size: 15.5px; max-width: 62ch; }
 
-font-family:Poppins,sans-serif;
-background:linear-gradient(180deg,#070b22,#11152d,#050816);
-overflow-x:hidden;
-color:white;
-text-align:center;
+  .hero{
+    max-width: 780px;
+    margin: 8px auto 0;
+    padding: 0 24px;
+  }
+  .hero-card{
+    background: var(--panel);
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    padding: 22px;
+    display: flex;
+    gap: 24px;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+  .grid-wrap{ flex: 0 0 auto; }
+  #pixelGrid{
+    display: grid;
+    grid-template-columns: repeat(8, 26px);
+    grid-template-rows: repeat(8, 26px);
+    gap: 3px;
+  }
+  .px{
+    width: 26px; height: 26px;
+    background: #808080;
+    border-radius: 3px;
+    cursor: pointer;
+    transition: transform .08s ease;
+  }
+  .px:hover{ transform: scale(1.08); }
+  .hero-text{ flex: 1 1 220px; min-width: 220px; }
+  .hero-text p{ margin: 0 0 10px; color: var(--muted); font-size: 14.5px; }
+  #pixelReadout{
+    font-size: 15px;
+    background: var(--panel-2);
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    padding: 10px 12px;
+    display:inline-block;
+  }
+  #pixelReadout b{ color: var(--amber); }
 
-}
+  main{ max-width: 780px; margin: 0 auto; padding: 0 24px; }
 
-canvas{
-position:fixed;
-top:0;
-left:0;
-z-index:-1;
-}
+  section.topic{ margin-top: 44px; }
+  .topic-head{
+    display:flex; align-items:baseline; gap: 10px;
+    border-bottom: 1px solid var(--line);
+    padding-bottom: 10px;
+    margin-bottom: 18px;
+  }
+  .topic-head .chip{
+    font-family:"JetBrains Mono", monospace;
+    font-size: 12px;
+    color: var(--bg);
+    background: var(--amber);
+    padding: 2px 7px;
+    border-radius: 5px;
+  }
+  .topic-head h2{ font-size: 20px; margin: 0; }
 
-.hero{
+  .card{
+    background: var(--panel);
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    padding: 18px 20px;
+    margin-bottom: 14px;
+  }
+  .card p.q{ margin: 0 0 12px; font-size: 15.5px; }
+  .options{ display:flex; flex-direction: column; gap: 8px; margin-bottom: 6px; }
+  .opt{
+    text-align: left;
+    padding: 10px 14px;
+    border-radius: 8px;
+    border: 1px solid var(--line);
+    background: var(--panel-2);
+    color: var(--text);
+    font-size: 14.5px;
+    cursor: pointer;
+    font-family: inherit;
+  }
+  .opt:hover{ border-color: var(--amber); }
+  .opt.correct{ border-color: var(--g); background: color-mix(in srgb, var(--g) 18%, var(--panel-2)); }
+  .opt.wrong{ border-color: var(--r); background: color-mix(in srgb, var(--r) 18%, var(--panel-2)); }
+  .opt[disabled]{ cursor: default; }
 
-height:100vh;
-display:flex;
-justify-content:center;
-align-items:center;
-flex-direction:column;
-padding:20px;
+  .reveal-btn{
+    background: none;
+    border: 1px dashed var(--line);
+    color: var(--muted);
+    padding: 7px 12px;
+    border-radius: 7px;
+    cursor: pointer;
+    font-size: 13.5px;
+    font-family: inherit;
+    margin-top: 4px;
+  }
+  .reveal-btn:hover{ color: var(--text); border-color: var(--muted); }
+  .answer{
+    display: none;
+    margin-top: 12px;
+    padding: 12px 14px;
+    background: var(--panel-2);
+    border-left: 3px solid var(--amber);
+    border-radius: 6px;
+    font-size: 14.5px;
+  }
+  .answer.show{ display: block; }
+  .answer .mono{ display:block; margin-top: 6px; color: var(--amber); }
 
-}
+  table.shape-table{ width: 100%; border-collapse: collapse; font-size: 14.5px; }
+  table.shape-table th, table.shape-table td{
+    border: 1px solid var(--line);
+    padding: 8px 10px;
+    text-align: center;
+  }
+  table.shape-table th{ color: var(--muted); font-weight: 600; }
+  input.fill{
+    width: 90px;
+    padding: 5px 6px;
+    border-radius: 5px;
+    border: 1px solid var(--line);
+    background: var(--bg);
+    color: var(--text);
+    font-family: "JetBrains Mono", monospace;
+    text-align: center;
+  }
+  .check-btn{
+    margin-top: 12px;
+    background: var(--amber);
+    color: #1b1300;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 7px;
+    cursor: pointer;
+    font-family: inherit;
+    font-weight: 700;
+    font-size: 14px;
+  }
+  .check-btn:hover{ filter: brightness(1.08); }
+  .status{ font-size: 13.5px; margin-top: 8px; color: var(--muted); }
 
-.hero h1{
+  code.inline{
+    font-family:"JetBrains Mono", monospace;
+    background: var(--panel-2);
+    padding: 1px 6px;
+    border-radius: 4px;
+    font-size: 13.5px;
+    display: inline-block;
+  }
 
-font-family:"Great Vibes";
-font-size:70px;
-color:#ffd8f2;
+  .rgb-row{ display:flex; gap:10px; margin-bottom: 14px; flex-wrap: wrap; }
+  .swatch{
+    width: 58px; height: 58px; border-radius: 8px; border:1px solid var(--line);
+    flex: 0 0 auto;
+  }
+  .rgb-inputs{ display:flex; gap: 8px; align-items:center; flex-wrap: wrap; }
+  .rgb-inputs input{
+    width: 62px; padding: 6px; border-radius: 5px; border:1px solid var(--line);
+    background: var(--bg); color: var(--text); font-family:"JetBrains Mono", monospace; text-align:center;
+  }
 
-}
+  .task-list{ list-style: none; margin: 0; padding: 0; display:flex; flex-direction:column; gap:10px; }
+  .task-list li{
+    display:flex; align-items:flex-start; gap: 10px;
+    background: var(--panel); border:1px solid var(--line); border-radius: 9px;
+    padding: 12px 14px;
+  }
+  .task-list input[type=checkbox]{
+    margin-top: 3px; width: 17px; height: 17px; accent-color: var(--amber); cursor:pointer;
+  }
+  .task-list label{ font-size: 14.5px; cursor:pointer; flex:1; }
+  .task-list .hint{ color: var(--muted); font-size: 13px; margin-top: 3px; display:block; }
 
-.hero p{
+  footer{
+    max-width: 780px; margin: 50px auto 0; padding: 20px 24px 0;
+    border-top: 1px solid var(--line);
+    color: var(--muted); font-size: 13.5px;
+  }
 
-margin-top:20px;
-font-size:22px;
-max-width:700px;
-line-height:1.7;
-
-}
-
-button{
-
-margin-top:40px;
-padding:18px 45px;
-font-size:18px;
-border:none;
-border-radius:40px;
-cursor:pointer;
-background:#ff3b87;
-color:white;
-transition:.4s;
-
-}
-
-button:hover{
-
-transform:scale(1.08);
-
-}
-
-.section{
-
-padding:90px 25px;
-
-}
-
-.photo{
-
-width:320px;
-max-width:90%;
-border-radius:25px;
-box-shadow:0 0 40px rgba(255,255,255,.25);
-
-}
-
-.message{
-
-max-width:850px;
-margin:auto;
-font-size:22px;
-line-height:2;
-
-}
-
-.gallery{
-
-display:flex;
-justify-content:center;
-
-}
-
-.footer{
-
-padding:70px;
-
-font-size:30px;
-
-font-family:"Great Vibes";
-
-color:#ffd6ef;
-
-}
-
-audio{
-
-margin-top:25px;
-
-}
-
-.heart{
-
-position:fixed;
-font-size:25px;
-animation:float 7s linear infinite;
-
-}
-
-@keyframes float{
-
-0%{
-
-transform:translateY(100vh);
-
-opacity:0;
-
-}
-
-20%{
-
-opacity:1;
-
-}
-
-100%{
-
-transform:translateY(-120vh);
-
-opacity:0;
-
-}
-
-}
-
+  @media (max-width: 480px){
+    #pixelGrid{ grid-template-columns: repeat(8, 22px); grid-template-rows: repeat(8, 22px); }
+    .px{ width:22px; height:22px; }
+  }
 </style>
-
 </head>
-
 <body>
 
-<canvas id="stars"></canvas>
+<header>
+  <p class="eyebrow">CSC360 — Image Processing · Lab 01</p>
+  <h1>Intro to Image Processing — Exercises</h1>
+  <p class="sub">A quick practice sheet covering the whole lab: digital image representation, image shape, pixel intensities, and RGB vs BGR. Try, guess, then hit "Show answer" to check yourself.</p>
+</header>
 
-<section class="hero">
-
-<h1>Happy Birthday Abdelrhman ❤️</h1>
-
-<p>
-
-Today is all about celebrating the most amazing person in my life.
-
-Thank you for being my happiness, my peace,
-
-and my greatest blessing.
-
-</p>
-
-<button onclick="document.getElementById('story').scrollIntoView({behavior:'smooth'})">
-
-Open Your Surprise ❤️
-
-</button>
-
-</section>
-
-<section class="section" id="story">
-
-<h2 style="font-size:42px;margin-bottom:40px;">Our Favorite Memory 📸</h2>
-
-<div class="gallery">
-
-<img src="our-photo.jpg" class="photo">
-
+<div class="hero">
+  <div class="hero-card">
+    <div class="grid-wrap">
+      <div id="pixelGrid"></div>
+    </div>
+    <div class="hero-text">
+      <p>This is an 8×8 pixel grid — like any grayscale image, just much smaller. Click any square to see its intensity value between 0 and 255.</p>
+      <div id="pixelReadout">Value: <b id="pixelVal">128</b> — <span id="pixelLabel">mid gray</span></div>
+    </div>
+  </div>
 </div>
 
-</section>
+<main>
 
-<section class="section">
+  <section class="topic">
+    <div class="topic-head">
+      <span class="chip">01</span>
+      <h2>Core Concepts</h2>
+    </div>
 
-<h2 style="font-size:42px;margin-bottom:30px;">To My Love ❤️</h2>
+    <div class="card">
+      <p class="q">What exactly does "processing" an image mean?</p>
+      <div class="options" data-correct="1">
+        <button class="opt">Converting the image into a sound file</button>
+        <button class="opt">Performing operations on the image to enhance it or extract information from it</button>
+        <button class="opt">Printing the image on photo paper</button>
+      </div>
+    </div>
 
-<div class="message">
+    <div class="card">
+      <p class="q">What does the value 0 represent in a grayscale image? What about 255?</p>
+      <button class="reveal-btn" onclick="toggleAnswer(this)">Show answer</button>
+      <div class="answer">
+        0 = pure black (complete absence of light) &nbsp;|&nbsp; 255 = pure white (maximum light intensity).
+      </div>
+    </div>
+  </section>
 
-Happy Birthday, My Love.
+  <section class="topic">
+    <div class="topic-head">
+      <span class="chip">02</span>
+      <h2>Image Shape</h2>
+    </div>
 
-<br><br>
+    <div class="card">
+      <p class="q">Fill in the table: for each <code class="inline">image.shape</code>, give the Height and Width, and say whether the image is Grayscale or Color.</p>
+      <table class="shape-table">
+        <thead>
+          <tr><th>Shape</th><th>Height</th><th>Width</th><th>Type</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="mono">(480, 640, 3)</td>
+            <td><input class="fill" data-key="s1h" placeholder="?"></td>
+            <td><input class="fill" data-key="s1w" placeholder="?"></td>
+            <td><input class="fill" data-key="s1t" placeholder="Gray/Color"></td>
+          </tr>
+          <tr>
+            <td class="mono">(720, 1280)</td>
+            <td><input class="fill" data-key="s2h" placeholder="?"></td>
+            <td><input class="fill" data-key="s2w" placeholder="?"></td>
+            <td><input class="fill" data-key="s2t" placeholder="Gray/Color"></td>
+          </tr>
+          <tr>
+            <td class="mono">(200, 300, 3)</td>
+            <td><input class="fill" data-key="s3h" placeholder="?"></td>
+            <td><input class="fill" data-key="s3w" placeholder="?"></td>
+            <td><input class="fill" data-key="s3t" placeholder="Gray/Color"></td>
+          </tr>
+        </tbody>
+      </table>
+      <button class="check-btn" onclick="checkShapes()">Check my answers</button>
+      <p class="status" id="shapeStatus"></p>
+    </div>
+  </section>
 
-Every moment with you has become one of my favorite memories.
+  <section class="topic">
+    <div class="topic-head">
+      <span class="chip">03</span>
+      <h2>Pixel Intensities</h2>
+    </div>
 
-You make ordinary days feel magical just by being there.
+    <div class="card">
+      <p class="q">Convert these values between decimal and 8-bit binary:</p>
+      <table class="shape-table">
+        <thead><tr><th>Decimal</th><th>Binary (8-bit)</th></tr></thead>
+        <tbody>
+          <tr><td class="mono">200</td><td><input class="fill" data-key="b1" placeholder="????????"></td></tr>
+          <tr><td><input class="fill" data-key="d2" placeholder="?"></td><td class="mono">00010110</td></tr>
+          <tr><td class="mono">0</td><td><input class="fill" data-key="b3" placeholder="????????"></td></tr>
+        </tbody>
+      </table>
+      <button class="check-btn" onclick="checkBinary()">Check my answers</button>
+      <p class="status" id="binStatus"></p>
+    </div>
 
-<br><br>
+    <div class="card">
+      <p class="q">Since each channel has 8 bits, the number of possible levels is 2⁸. What is that number? And if a channel only had 4 bits, how many levels would that give?</p>
+      <button class="reveal-btn" onclick="toggleAnswer(this)">Show answer</button>
+      <div class="answer">
+        2⁸ = 256 levels (0 to 255). With 4 bits: 2⁴ = 16 levels only (0 to 15) — a much coarser grayscale gradient.
+      </div>
+    </div>
+  </section>
 
-I pray that this year brings you endless happiness,
+</main>
 
-success beyond your dreams,
-
-good health,
-
-and every beautiful thing your heart wishes for.
-
-<br><br>
-
-Thank you for loving me,
-
-supporting me,
-
-and making me smile even on my hardest days.
-
-<br><br>
-
-I can't wait to celebrate many more birthdays together.
-
-<br><br>
-
-I love you more than words can ever describe.
-
-❤️
-
-</div>
-
-</section>
-
-<section class="section">
-
-<h2 style="font-size:40px;">Our Song 🎵</h2>
-
-<p style="margin:20px">
-
-Press Play
-
-</p>
-
-<audio controls>
-
-<source src="YOUR_SONG.mp3" type="audio/mpeg">
-
-</audio>
-
-</section>
-
-<section class="section">
-
-<h2 style="font-size:45px;">One Last Thing...</h2>
-
-<button onclick="showLove()">
-
-Open My Heart ❤️
-
-</button>
-
-</section>
-
-<div class="footer" id="final">
-
-Forever & Always,
-
-<br>
-
-Your Menna ❤️
-
-</div>
+<footer>
+  CSC360 - Image Processing · Fall 2025
+</footer>
 
 <script>
+  const grid = document.getElementById('pixelGrid');
+  const readoutVal = document.getElementById('pixelVal');
+  const readoutLabel = document.getElementById('pixelLabel');
+  for(let i=0;i<64;i++){
+    const v = Math.floor(Math.random()*256);
+    const cell = document.createElement('div');
+    cell.className = 'px';
+    cell.style.background = `rgb(${v},${v},${v})`;
+    cell.addEventListener('click', ()=>{
+      readoutVal.textContent = v;
+      readoutLabel.textContent = v < 60 ? 'near black' : v > 195 ? 'near white' : 'mid gray';
+    });
+    grid.appendChild(cell);
+  }
 
-function showLove(){
+  function toggleAnswer(btn){
+    const ans = btn.nextElementSibling;
+    ans.classList.toggle('show');
+    btn.textContent = ans.classList.contains('show') ? 'Hide answer' : 'Show answer';
+  }
 
-alert("Happy Birthday My Forever ❤️\\n\\nI Love You Endlessly.");
+  document.querySelectorAll('.options').forEach(group=>{
+    const correctIdx = parseInt(group.dataset.correct, 10);
+    const opts = group.querySelectorAll('.opt');
+    opts.forEach((btn, idx)=>{
+      btn.addEventListener('click', ()=>{
+        opts.forEach(o=>o.disabled = true);
+        if(idx === correctIdx){
+          btn.classList.add('correct');
+        } else {
+          btn.classList.add('wrong');
+          opts[correctIdx].classList.add('correct');
+        }
+      });
+    });
+  });
 
-confetti();
+  function checkShapes(){
+    const answers = {
+      s1h:'480', s1w:'640', s1t:'color',
+      s2h:'720', s2w:'1280', s2t:'gray',
+      s3h:'200', s3w:'300', s3t:'color'
+    };
+    let correct = 0, total = Object.keys(answers).length;
+    document.querySelectorAll('input.fill[data-key]').forEach(inp=>{
+      const key = inp.dataset.key;
+      if(!(key in answers)) return;
+      const val = inp.value.trim().toLowerCase();
+      const expected = answers[key];
+      const isTypeField = key.endsWith('t');
+      let ok;
+      if(isTypeField){
+        ok = (expected === 'gray' && val.includes('gray')) ||
+             (expected === 'color' && val.includes('color'));
+      } else {
+        ok = val === expected;
+      }
+      inp.style.borderColor = ok ? 'var(--g)' : (val ? 'var(--r)' : 'var(--line)');
+      if(ok) correct++;
+    });
+    document.getElementById('shapeStatus').textContent = `${correct} / ${total} correct`;
+  }
 
-}
-
-function confetti(){
-
-for(let i=0;i<120;i++){
-
-let h=document.createElement("div");
-
-h.innerHTML="❤️";
-
-h.className="heart";
-
-h.style.left=Math.random()*100+"vw";
-
-h.style.animationDuration=(4+Math.random()*4)+"s";
-
-document.body.appendChild(h);
-
-setTimeout(()=>h.remove(),8000);
-
-}
-
-}
-
-const canvas=document.getElementById("stars");
-
-const ctx=canvas.getContext("2d");
-
-canvas.width=window.innerWidth;
-
-canvas.height=window.innerHeight;
-
-let stars=[];
-
-for(let i=0;i<200;i++){
-
-stars.push({
-
-x:Math.random()*canvas.width,
-
-y:Math.random()*canvas.height,
-
-r:Math.random()*2
-
-});
-
-}
-
-function draw(){
-
-ctx.clearRect(0,0,canvas.width,canvas.height);
-
-ctx.fillStyle="white";
-
-stars.forEach(s=>{
-
-ctx.beginPath();
-
-ctx.arc(s.x,s.y,s.r,0,Math.PI*2);
-
-ctx.fill();
-
-s.y+=0.2;
-
-if(s.y>canvas.height)s.y=0;
-
-});
-
-requestAnimationFrame(draw);
-
-}
-
-draw();
+  function checkBinary(){
+    const b1 = document.querySelector('input[data-key="b1"]');
+    const d2 = document.querySelector('input[data-key="d2"]');
+    const b3 = document.querySelector('input[data-key="b3"]');
+    let correct = 0;
+    const check = (inp, expected)=>{
+      const ok = inp.value.trim().replace(/\s/g,'') === expected;
+      inp.style.borderColor = ok ? 'var(--g)' : (inp.value ? 'var(--r)' : 'var(--line)');
+      if(ok) correct++;
+    };
+    check(b1, '11001000');
+    check(d2, '22');
+    check(b3, '00000000');
+    document.getElementById('binStatus').textContent = `${correct} / 3 correct`;
+  }
 
 </script>
 
 </body>
-
-</html> make qr code scan to log into the site and make the site more interactive 
+</html>
